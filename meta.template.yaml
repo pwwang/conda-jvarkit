@@ -1,0 +1,27 @@
+package:
+    name: jvarkit
+    version: '{{version}}'
+source:
+    git_url: https://github.com/lindenb/jvarkit.git
+    git_rev: '{{version}}'
+build:
+    noarch: ''
+    noarch_python: false
+    number: '0'
+    string: '0'
+requirements:
+    build:
+        - java-jdk 
+        - openjdk 
+    run:
+        - python >=3.6
+        - pip
+        - java-jdk
+test:
+    commands:
+        - jarkit vcfstats --help
+about:
+    home: https://github.com/lindenb/jvarkit
+    summary: Java utilities for Bioinformatics
+extra:
+    final: true

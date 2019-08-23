@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+try:
+	import cmdy
+	from pyparam import commands
+except ImportError:
+	# conda can't specify pip dependencies
+	import pip
+	def pip_install(package):
+		if hasattr(pip, 'main'):
+			pip.main(['install', package])
+		else:
+			pip._internal.main(['install', package])
+	pip_install('cmdy')
+	pip_install('pyparam')
+
+commands.install = 'Install a jvarkit tool.'
+commands.install._.required = True
+commands.install._.desc = 'The jvarkit tool to be installed. Use "jvarkit list" to see all available tools.'
+commands.list = 'List available jvarkit tools.'
+commands.list._hbald = False
+commands.version = 'Show current version of jvarkit.'
+
+def list_tools():
+	pass
+
+def show_version():
+	print('jvarkit v{{version}} built by conda-jvarkit.')
+
+if __name__ == '__main__':
+	command, opts, gopts = commands._parse()
+	if command == 'version' or gopts['version']:
+		show_version()
+	if command == 'list':
+		list_tools()
+
