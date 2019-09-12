@@ -11,14 +11,14 @@ build:
     string: '{{rev}}'
 requirements:
     build:
-        - openjdk 
+        - openjdk
     run:
         - python >=3.6
         - pip
-        - openjdk 
+        - openjdk
 test:
     commands:
-        - jvarkit vcfstats --help
+        - jvarkit list
 about:
     home: https://github.com/lindenb/jvarkit
     summary: Java utilities for Bioinformatics
