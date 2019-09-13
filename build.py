@@ -13,7 +13,7 @@ METATPL  = HERE / 'meta.template.yaml'
 JVARKIT  = HERE / 'jvarkit.py'
 JVKITPL  = HERE / 'jvarkit.template.py'
 
-commands.check             = 'Check if jvarkit is updated'
+commands.check             = 'Check if jvarkit is up-to-date.'
 commands.check._hbald      = False
 commands.build             = 'Check and build conda package for jvarkit if it is outdated.'
 commands.build._hbald      = False
@@ -22,7 +22,6 @@ commands.build.force.desc  = 'Build the package anyway, even if it is up-to-date
 commands.build.rev.desc    = 'Build the package at this revision, implies "--force".'
 commands.build.upload      = False
 commands.build.upload.desc = 'Upload the package after build.'
-commands.upload            = 'Upload the built package.'
 
 @lru_cache()
 def get_latest_jvarkit_version():
@@ -57,7 +56,7 @@ def build_jvarkit(rev, date = None):
 
 	print("- Start bulding the package ...")
 	cmdy.conda.build(HERE, _fg = True)
-	
+
 def check():
 	print("- Checking if jvarkit build is up-to-date ...")
 	curr_date, curr_version = get_current_jvarkit_version()

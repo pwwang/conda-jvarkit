@@ -125,8 +125,7 @@ def show_version():
 	print('jvarkit v%s built by conda-jvarkit.' % __version__)
 
 def install_tool(tool):
-	cmdy.gradlew(_fg = True, _exe = str(JARDIR.parent / 'gradlew'), p = str(JARDIR.parent), _ = tool)
-
+	cmdy.gradlew(_fg = True, _exe = './gradlew', _cwd = str(JARDIR.parent), _ = tool)
 
 def run_tool(tool, opts):
 	for hopt in commands[tool]._hopts:
