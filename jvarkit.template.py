@@ -41,7 +41,8 @@ def get_tools():
 
 @lru_cache()
 def tool_help(tool, java = 'java'):
-	return str(cmdy.java('-jar', str(JARDIR / (tool + '.jar')), h = True, _exe = java))
+	return cmdy.java(jar=JARDIR.joinpath(tool+'.jar'),
+					 h=True, _exe=java, _prefix='-').stdout
 
 def helpx(helps):
 	helps.delete('Global optional options')
@@ -125,7 +126,7 @@ def show_version():
 	print('jvarkit v%s built by conda-jvarkit.' % __version__)
 
 def install_tool(tool):
-	cmdy.gradlew(_fg = True, _exe = './gradlew', _cwd = str(JARDIR.parent), _ = tool)
+	cmdy.gradlew(_exe='./gradlew', _cwd=str(JARDIR.parent), _=tool).fg
 
 def run_tool(tool, opts):
 	for hopt in commands[tool]._hopts:
@@ -141,11 +142,10 @@ def run_tool(tool, opts):
 	if hh:
 		print(tool_help(tool, java))
 		return
-	opts['_fg']  = True
 	opts['_exe'] = java
 	try:
-		cmdy.java(*javaopts, **opts)
-	except cmdy.CmdyReturnCodeException:
+		cmdy.java(*javaopts, **opts).fg
+	except cmdy.CmdyReturnCodeError:
 		commands[tool]._help(print_and_exit = True)
 
 if __name__ == '__main__':

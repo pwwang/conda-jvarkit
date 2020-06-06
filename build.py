@@ -55,7 +55,7 @@ def build_jvarkit(rev, date = None):
 	))
 
 	print("- Start bulding the package ...")
-	cmdy.conda.build(HERE, _fg = True)
+	cmdy.conda.build(HERE).fg
 
 def check():
 	print("- Checking if jvarkit build is up-to-date ...")
